@@ -1,4 +1,5 @@
 
+from binarysearchtree.BinarySearchTree import BinarySearchTree
 from binarytree.BinaryTree import BinaryTree
 from trees.Node import Node
 
@@ -19,11 +20,10 @@ if  __name__ == "__main__":
   print(b.size_of_binary_tree(b.root))
   print(b.size_of_binary_tree_iterative(b.root))
   
-  tree = BinaryTree(12)
-  tree.root.left = Node(32)
-  tree.root.right = Node(37)
-  tree.root.left.left = Node(24)
-  tree.root.left.right = Node(5)
-  tree.root.right.left = Node(100)
-  tree.root.right.right = Node(75)
+  tree = BinarySearchTree(4)
+  tree.insert(2)
+  tree.insert(8)
+  tree.insert(5)
+  tree.insert(10)
+  print(tree.is_valid_bst(tree.root))
   

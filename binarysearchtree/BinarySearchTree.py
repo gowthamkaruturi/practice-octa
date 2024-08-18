@@ -7,6 +7,8 @@ class BinarySearchTree:
    self.root = Node(value)
  
   def is_empty(self,node:Node) -> bool:
+    if not node:
+      return True
     return node.item == None
       
   
@@ -18,12 +20,18 @@ class BinarySearchTree:
   
   
   def insert_helper(self, node:Node, element:int) -> None:
-    if self.is_empty(node):
-      node.item = Node(element)
+
     if node.item < element:
-      self.insert_helper(node.left, element=element)
-    if node.item > element:
-      self.insert_helper(node.left, element=element)
+      if node.right is None:
+        node.right = Node(element)
+      else:
+        self.insert_helper(node.right, element=element)
+    else :
+      if node.left is None:
+        node.left = Node(element)
+      else:
+        self.insert_helper(node.left, element=element)
+     
   
   def in_order_traversal(self, root: Node, response: list[int]) -> list[int]:
     if root:
@@ -39,11 +47,29 @@ class BinarySearchTree:
     return False
 
   def max_value(self, node:Node) -> int:
-    if node.right.right == None:
+    if node.right == None:
       return node.item
     else:
       return self.max_value(node.right
                             )
   
-      
+  def min_value(self, node:Node) -> int:
+    if node.left == None:
+      return node.item
+    else:
+      return self.min_value(node.left)
+  
+  def is_valid_bst(self) -> bool:
+    return self.helper(self.root, inf
+                       )
+    
+  
+  def helper(self,node:Node, min:int,max:int)-> bool:
+    
+    if not node:
+      return True
+    if node.left.item <= min or node.right.item >= max:
+     return False
+    else:
+      return self.helper(node.left,min,node.item) and self.helper(node.right,node.item, max)
     
